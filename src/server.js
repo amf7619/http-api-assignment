@@ -19,16 +19,15 @@ const urlStruct = {
 
 const onRequest = (request, response) => {
   const parsedURL = url.parse(request.url);
+  const acceptedTypes = request.headers.accept.split(',');
+  const params = query.parse(parsedURL.query);
   
   console.log(parsedURL);
 
-  switch (request.url) {
-    case '/':
-      htmlHandler.getIndex(request, response);
-      break;
-    default:
-      htmlHandler.getIndex(request, response);
-      break;
+  if(urlStruct[parsedURL.pathname]) {
+    urlStruct[parsedURL.pathname](request, response, acceptedTypes, params);
+  } else {
+    urlStruct.notFound(request, response, acceptedTypes, params);
   }
 };
 
