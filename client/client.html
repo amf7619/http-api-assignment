@@ -20,7 +20,7 @@
 
         p.textContent = `Message: ${obj.message}`;
       } else if(type === 'text/xml') {
-        const message = 'Message: ' + xhr.responseXML.querySelector('message').textContent;
+        const message = xhr.responseXML.querySelector('message').textContent;
 
         p.textContent = `Message: ${message}`;
       }
@@ -71,7 +71,7 @@
       const typeSelect = document.querySelector('#type');
       const sendBtn = document.querySelector('#send');
 
-      sendBtn.addEventListener('click', () => { sendAjax(window.location.href + pageSelect.value, typeSelect.value) });
+      sendBtn.addEventListener('click', () => { sendAjax(pageSelect.value, typeSelect.value) });
     }
 
     window.onload = init;

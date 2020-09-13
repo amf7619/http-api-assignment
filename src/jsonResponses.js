@@ -17,7 +17,7 @@ const success = (request, response, acceptedTypes) => {
     id: 'success',
   };
 
-  respondJSON(request, response, 200, responseJSON, acceptedTypes);
+  respond(request, response, 200, responseJSON, acceptedTypes);
 };
 
 const badRequest = (request, response, acceptedTypes, params) => {
@@ -26,8 +26,8 @@ const badRequest = (request, response, acceptedTypes, params) => {
     id: 'badRequest',
   };
 
-  if(params.valid) respondJSON(request, response, 200, responseJSON, acceptedTypes);
-  else respondJSON(request, response, 400, responseJSON, acceptedTypes);
+  if(params.valid) respond(request, response, 200, responseJSON, acceptedTypes);
+  else respond(request, response, 400, responseJSON, acceptedTypes);
 };
 
 const unauthorized = (request, response, acceptedTypes, params) => {
@@ -36,8 +36,8 @@ const unauthorized = (request, response, acceptedTypes, params) => {
         id: 'unauthorized',
     }
 
-    if(params.loggedIn) respondJSON(request, response, 200, responseJSON, acceptedTypes);
-    else respondJSON(request, response, 401, responseJSON, acceptedTypes);
+    if(params.loggedIn) respond(request, response, 200, responseJSON, acceptedTypes);
+    else respond(request, response, 401, responseJSON, acceptedTypes);
 }
 
 const forbidden = (request, response, acceptedTypes) => {
@@ -46,7 +46,7 @@ const forbidden = (request, response, acceptedTypes) => {
         id: 'forbidden',
     }
 
-    respondJSON(request, response, 403, responseJSON, acceptedTypes);
+    respond(request, response, 403, responseJSON, acceptedTypes);
 }
 
 const internal = (request, response, acceptedTypes) => {
@@ -55,7 +55,7 @@ const internal = (request, response, acceptedTypes) => {
         id: 'internalError',
     }
 
-    respondJSON(request, response, 500, responseJSON, acceptedTypes);
+    respond(request, response, 500, responseJSON, acceptedTypes);
 }
 
 const notImplemented = (request, response, acceptedTypes) => {
@@ -64,7 +64,7 @@ const notImplemented = (request, response, acceptedTypes) => {
         id: 'notImplemented',
     }
 
-    respondJSON(request, response, 501, responseJSON, acceptedTypes);
+    respond(request, response, 501, responseJSON, acceptedTypes);
 }
 
 const notFound = (request, response, acceptedTypes) => {
@@ -73,7 +73,7 @@ const notFound = (request, response, acceptedTypes) => {
     id: 'notFound',
   };
 
-  respondJSON(request, response, 404, responseJSON, acceptedTypes);
+  respond(request, response, 404, responseJSON, acceptedTypes);
 };
 
 module.exports = {
