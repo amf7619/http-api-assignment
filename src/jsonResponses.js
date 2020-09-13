@@ -15,7 +15,6 @@ const respond = (request, response, status, object, types) => {
 const success = (request, response, acceptedTypes) => {
   const responseJSON = {
     message: 'This is a successful response',
-    id: 'success',
   };
 
   respond(request, response, 200, responseJSON, acceptedTypes);
@@ -27,7 +26,7 @@ const badRequest = (request, response, acceptedTypes, params) => {
     id: 'badRequest',
   };
 
-  if (params.valid) respond(request, response, 200, responseJSON, acceptedTypes);
+  if (params.valid === 'true') respond(request, response, 200, responseJSON, acceptedTypes);
   else respond(request, response, 400, responseJSON, acceptedTypes);
 };
 
@@ -37,7 +36,7 @@ const unauthorized = (request, response, acceptedTypes, params) => {
     id: 'unauthorized',
   };
 
-  if (params.loggedIn) respond(request, response, 200, responseJSON, acceptedTypes);
+  if (params.loggedIn === 'yes') respond(request, response, 200, responseJSON, acceptedTypes);
   else respond(request, response, 401, responseJSON, acceptedTypes);
 };
 

@@ -76,7 +76,7 @@
       const typeSelect = document.querySelector('#type');
       const sendBtn = document.querySelector('#send');
 
-      sendBtn.addEventListener('click', () => { sendAjax(pageSelect.value, typeSelect.value) });
+      sendBtn.addEventListener('click', () => { sendAjax(pageSelect.value + window.location.search, typeSelect.value) });
     }
 
     window.onload = init;
