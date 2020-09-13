@@ -51,6 +51,8 @@
           content.innerHTML = '<b>Error code not implemented by client!</b>';
           break;
       }
+
+      content.appendChild(p);
     };
 
     const sendAjax = (url, acceptedType) => {
