@@ -7,7 +7,7 @@ const respond = (request, response, content, type) => {
   response.writeHead(200, { 'Content-Type': type });
   response.write(content);
   response.end();
-}
+};
 
 const getIndex = (request, response) => {
   respond(request, response, index, 'text/html');
@@ -15,7 +15,7 @@ const getIndex = (request, response) => {
 
 const getCSS = (request, response) => {
   respond(request, response, css, 'text/css');
-}
+};
 
 module.exports = {
   getIndex,

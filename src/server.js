@@ -22,10 +22,10 @@ const onRequest = (request, response) => {
   const parsedURL = url.parse(request.url);
   const acceptedTypes = request.headers.accept.split(',');
   const params = query.parse(parsedURL.query);
-  
+
   console.log(parsedURL);
 
-  if(urlStruct[parsedURL.pathname]) {
+  if (urlStruct[parsedURL.pathname]) {
     urlStruct[parsedURL.pathname](request, response, acceptedTypes, params);
   } else {
     urlStruct.notFound(request, response, acceptedTypes, params);

@@ -1,12 +1,13 @@
 const respond = (request, response, status, object, types) => {
-    let responseObj;
+  let responseObj;
 
-    if(types[0] === 'text/xml') {
-        responseObj = `<response> <message>${object.message}</message> <id>${object.id}</id> </response>`
-    } else if(types[0] === 'application/json') {
-        responseObj = JSON.stringify(object);
-    }
-  response.writeHead(status, { 'Content-Type': types[0] });
+  if (types[0] === 'text/xml') {
+    responseObj = `<response> <message>${object.message}</message> <id>${object.id}</id> </response>`;
+    response.writeHead(status, { 'Content-Type': 'text/xml' });
+  } else {
+    responseObj = JSON.stringify(object);
+    response.writeHead(status, { 'Content-Type': 'application/json' });
+  }
   response.write(responseObj);
   response.end();
 };
@@ -26,46 +27,46 @@ const badRequest = (request, response, acceptedTypes, params) => {
     id: 'badRequest',
   };
 
-  if(params.valid) respond(request, response, 200, responseJSON, acceptedTypes);
+  if (params.valid) respond(request, response, 200, responseJSON, acceptedTypes);
   else respond(request, response, 400, responseJSON, acceptedTypes);
 };
 
 const unauthorized = (request, response, acceptedTypes, params) => {
-    const responseJSON = {
-        message: 'Missing loggedIn query parameter set to yes',
-        id: 'unauthorized',
-    }
+  const responseJSON = {
+    message: 'Missing loggedIn query parameter set to yes',
+    id: 'unauthorized',
+  };
 
-    if(params.loggedIn) respond(request, response, 200, responseJSON, acceptedTypes);
-    else respond(request, response, 401, responseJSON, acceptedTypes);
-}
+  if (params.loggedIn) respond(request, response, 200, responseJSON, acceptedTypes);
+  else respond(request, response, 401, responseJSON, acceptedTypes);
+};
 
 const forbidden = (request, response, acceptedTypes) => {
-    const responseJSON = {
-        message: 'You do not have access to this content',
-        id: 'forbidden',
-    }
+  const responseJSON = {
+    message: 'You do not have access to this content',
+    id: 'forbidden',
+  };
 
-    respond(request, response, 403, responseJSON, acceptedTypes);
-}
+  respond(request, response, 403, responseJSON, acceptedTypes);
+};
 
 const internal = (request, response, acceptedTypes) => {
-    const responseJSON = {
-        message: 'Internal Server Error. Something went wrong.',
-        id: 'internalError',
-    }
+  const responseJSON = {
+    message: 'Internal Server Error. Something went wrong.',
+    id: 'internalError',
+  };
 
-    respond(request, response, 500, responseJSON, acceptedTypes);
-}
+  respond(request, response, 500, responseJSON, acceptedTypes);
+};
 
 const notImplemented = (request, response, acceptedTypes) => {
-    const responseJSON = {
-        message: 'A get request for this page has not been implemented yet. Check again later for updated content.',
-        id: 'notImplemented',
-    }
+  const responseJSON = {
+    message: 'A get request for this page has not been implemented yet. Check again later for updated content.',
+    id: 'notImplemented',
+  };
 
-    respond(request, response, 501, responseJSON, acceptedTypes);
-}
+  respond(request, response, 501, responseJSON, acceptedTypes);
+};
 
 const notFound = (request, response, acceptedTypes) => {
   const responseJSON = {

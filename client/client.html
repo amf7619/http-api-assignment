@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <title>Our simple HTTP server</title>
+  
   <link rel="stylesheet" type="text/css" href="/style.css">
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
@@ -18,9 +19,13 @@
       if(type === 'application/json') {
         const obj = JSON.parse(xhr.response);
 
+        console.log(xhr.response);
+
         p.textContent = `Message: ${obj.message}`;
       } else if(type === 'text/xml') {
         const message = xhr.responseXML.querySelector('message').textContent;
+
+        console.log(xhr.responseXML);
 
         p.textContent = `Message: ${message}`;
       }
